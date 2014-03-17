@@ -7,9 +7,9 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Storage;
 using Microsoft.Xna.Framework.GamerServices;
+using Artemis;
 #endregion
 
-//test change by lenny
 namespace Hide_Out
 {
     /// <summary>
@@ -19,10 +19,6 @@ namespace Hide_Out
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        Texture2D player;
-        Rectangle playerLoc;
-        Searcher testSearcher;
-        BasicEffect basicEffect;
 
         public Game1()
             : base()
@@ -40,8 +36,6 @@ namespace Hide_Out
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            IsMouseVisible = false;
-            this.Window.Title = "";
 
             base.Initialize();
         }
@@ -56,18 +50,6 @@ namespace Hide_Out
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
-            player = Content.Load<Texture2D>("green");
-            playerLoc = new Rectangle(0, 0, player.Width, player.Height);
-            testSearcher = new Searcher(Content.Load<Texture2D>("black"),
-                new Rectangle(300, 150, 25, 25),
-                200,
-                .60,
-                Vector2.UnitX
-                );
-
-            basicEffect = new BasicEffect(GraphicsDevice);
-            basicEffect.VertexColorEnabled = true;
-            basicEffect.LightingEnabled = false;
         }
 
         /// <summary>
@@ -90,67 +72,6 @@ namespace Hide_Out
                 Exit();
 
             // TODO: Add your update logic here
-            if (Keyboard.GetState().IsKeyDown(Keys.W))
-            {
-                testSearcher.Move(0, -1);
-            }
-            if(Keyboard.GetState().IsKeyDown(Keys.A)) 
-            {
-                testSearcher.Move(-1, 0);
-            }
-            if (Keyboard.GetState().IsKeyDown(Keys.S))
-            {
-                testSearcher.Move(0, 1);
-            }
-            if(Keyboard.GetState().IsKeyDown(Keys.D)) 
-            {
-                testSearcher.Move(1, 0);
-            }
-            if (Keyboard.GetState().IsKeyDown(Keys.Q))
-            {
-                testSearcher.Rotate(.1);
-            }
-            if (Keyboard.GetState().IsKeyDown(Keys.E))
-            {
-                testSearcher.Rotate(-.1);
-            }
-
-            if (Keyboard.GetState().IsKeyDown(Keys.Up))
-            {
-                playerLoc.Y--;
-            }
-            if (Keyboard.GetState().IsKeyDown(Keys.Left))
-            {
-                playerLoc.X--;
-            }
-            if (Keyboard.GetState().IsKeyDown(Keys.Down))
-            {
-                playerLoc.Y++;
-            }
-            if (Keyboard.GetState().IsKeyDown(Keys.Right))
-            {
-                playerLoc.X++;
-            }
-
-            if (Keyboard.GetState().IsKeyDown(Keys.R))
-            {
-                testSearcher.setViewDistance(testSearcher.getViewDistance() + 1);
-            }
-            if (Keyboard.GetState().IsKeyDown(Keys.F))
-            {
-                testSearcher.setViewDistance(testSearcher.getViewDistance() - 1);
-            }
-            if (Keyboard.GetState().IsKeyDown(Keys.X))
-            {
-                testSearcher.setViewAngle(testSearcher.getViewAngle() + .01);
-            }
-            if (Keyboard.GetState().IsKeyDown(Keys.Z))
-            {
-                testSearcher.setViewAngle(testSearcher.getViewAngle() - .01);
-            }
-
-            if(testSearcher.CanSee(playerLoc)) this.Window.Title = "Caught!";
-            else this.Window.Title = "Hidden";
 
             base.Update(gameTime);
         }
@@ -161,33 +82,9 @@ namespace Hide_Out
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.White);
+            GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
-            GraphicsDevice.BlendState = BlendState.Opaque;
-            GraphicsDevice.DepthStencilState = DepthStencilState.Default;
-            GraphicsDevice.SamplerStates[0] = SamplerState.LinearWrap;
-
-            Matrix projection = Matrix.CreateOrthographicOffCenter(0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height, 0, 0, 1);
-            Matrix halfPixelOffset = Matrix.CreateTranslation(-0.5f, -0.5f, 0);
-
-            basicEffect.World = Matrix.Identity;
-            basicEffect.View = Matrix.Identity;
-            basicEffect.Projection = halfPixelOffset * projection;
-
-            basicEffect.VertexColorEnabled = true;
-            GraphicsDevice.RasterizerState = RasterizerState.CullNone;
-
-            foreach (EffectPass pass in basicEffect.CurrentTechnique.Passes)
-            {
-                pass.Apply();
-                GraphicsDevice.DrawUserPrimitives<VertexPositionColor>(PrimitiveType.TriangleList, testSearcher.getFieldOfViewTriangle(), 0, 1);
-            }
-
-            spriteBatch.Begin();
-            spriteBatch.Draw(player, playerLoc, Color.White);
-            spriteBatch.Draw(testSearcher.getTexture(), testSearcher.getLocation(), Color.White);
-            spriteBatch.End();
 
             base.Draw(gameTime);
         }
