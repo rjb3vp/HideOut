@@ -23,42 +23,22 @@ namespace Hide_Out.Controllers
             KeyboardState keyboard = Keyboard.GetState();
             if (keyboard.IsKeyDown(Keys.Left))
             {
-                this.moveLeft();
+                thePlayer.moveLeft();
             }
             if (keyboard.IsKeyDown(Keys.Right))
             {
-                this.moveRight();
+                thePlayer.moveRight();
 
             }
             if (keyboard.IsKeyDown(Keys.Up))
             {
-                this.moveUp();
+                thePlayer.moveUp();
 
             }
             if (keyboard.IsKeyDown(Keys.Down))
             {
-                this.moveDown();
+                thePlayer.moveDown();
             }
-        }
-
-        public void moveRight()
-        {
-            thePlayer.Position += new Vector2(thePlayer.CurrentSpeed, 0);
-        }
-
-        public void moveLeft()
-        {
-            thePlayer.Position += new Vector2(-1*thePlayer.CurrentSpeed, 0);
-        }
-
-        public void moveUp()
-        {
-            thePlayer.Position += new Vector2(0, thePlayer.CurrentSpeed);
-        }
-
-        public void moveDown()
-        {
-            thePlayer.Position += new Vector2(0, -1*thePlayer.CurrentSpeed);
         }
 
         public void pickupItem(Item item)

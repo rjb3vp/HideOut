@@ -15,7 +15,10 @@ namespace Hide_Out.Primatives
 
         public double viewAngle
         {
-            get;
+            get
+            {
+                return viewAngle;
+            }
             set
             {
                 if (value < 0) value = 0;
@@ -28,7 +31,10 @@ namespace Hide_Out.Primatives
 
         public Vector2 viewDirection
         {
-            get;
+            get
+            {
+                return viewDirection;
+            }
             set
             {
                 viewDirection = Normalize(value);

@@ -17,12 +17,12 @@ namespace Hide_Out.Entities
 
         public NPC(NPCType type, Vector2 pos, Vector2 facing, Texture2D spr)
         {
-            position = pos;
-            sprite = spr;
+            Position = pos;
+            Sprite = spr;
             tag = type;
             switch (type) {
                 case NPCType.Police:
-                    vision = new Vision(rectangle, 50.0f, 1, facing, Color.Red);
+                    vision = new Vision(Rectangle, 50.0f, 1, facing, Color.Red);
                     speed = 10;
                     break;
             }
@@ -31,13 +31,13 @@ namespace Hide_Out.Entities
         public void Move(Vector2 direction)
         {
             Vector2 normVec = Normalize(direction);
-            position += normVec*speed;
-            Rectangle tempRec = rectangle;
-            tempRec.X = (int) position.X;
-            tempRec.Y = (int) position.Y;
-            rectangle = tempRec;
+            Position += normVec*speed;
+            Rectangle tempRec = Rectangle;
+            tempRec.X = (int) Position.X;
+            tempRec.Y = (int) Position.Y;
+            Rectangle = tempRec;
             Vision tempVis = vision;
-            tempVis.parentLocation = rectangle;
+            tempVis.parentLocation = Rectangle;
         }
 
         public void Rotate(double angle) //positive to turn left, negative to turn right

@@ -48,6 +48,26 @@ namespace Hide_Out.Entities
 
         }
 
+        public void moveRight()
+        {
+            this.Position += new Vector2(this.CurrentSpeed, 0);
+        }
+
+        public void moveLeft()
+        {
+            this.Position += new Vector2(-1 * this.CurrentSpeed, 0);
+        }
+
+        public void moveUp()
+        {
+            this.Position += new Vector2(0, this.CurrentSpeed);
+        }
+
+        public void moveDown()
+        {
+            this.Position += new Vector2(0, -1 * this.CurrentSpeed);
+        }
+
         public override string ToString()
         {
             return base.ToString() +
