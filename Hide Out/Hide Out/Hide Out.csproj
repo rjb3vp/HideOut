@@ -35,6 +35,10 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Controllers\ItemController.cs" />
+    <Compile Include="Controllers\NPCController.cs" />
+    <Compile Include="Controllers\ObstacleController.cs" />
+    <Compile Include="Controllers\PlayerController.cs" />
     <Compile Include="Entities\Entity.cs" />
     <Compile Include="Entities\Item.cs" />
     <Compile Include="Entities\NPC.cs" />
